@@ -6,7 +6,9 @@ import Plot
 struct GiPyoJohnKim: Website {
     enum SectionID: String, WebsiteSectionID {
         // Add the sections that you want your website to contain here:
-        case posts
+        case about
+        case projects
+        case blog
     }
 
     struct ItemMetadata: WebsiteItemMetadata {
@@ -14,9 +16,9 @@ struct GiPyoJohnKim: Website {
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "https://your-website-url.com")!
-    var name = "GiPyoJohnKim"
-    var description = "A description of GiPyoJohnKim"
+    var url = URL(string: "https://gipyojohnkim.com")!
+    var name = "Gi Pyo John Kim's Portfolio"
+    var description = "Gi Pyo John Kim - My development journey"
     var language: Language { .english }
     var imagePath: Path? { nil }
 }
