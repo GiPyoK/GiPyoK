@@ -23,5 +23,4 @@ struct GiPyoJohnKim: Website {
     var imagePath: Path? { nil }
 }
 
-// This will generate your website using the built-in Foundation theme:
-try GiPyoJohnKim().publish(withTheme: .foundation)
+try GiPyoJohnKim().publish(withTheme: .myTheme)
