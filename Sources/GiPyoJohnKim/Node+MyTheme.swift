@@ -8,7 +8,7 @@
 import Publish
 import Plot
 
-private extension Node where Context == HTML.BodyContext {
+extension Node where Context == HTML.BodyContext {
     static func wrapper(_ nodes: Node...) -> Node {
         .div(.class("wrapper"), .group(nodes))
     }
