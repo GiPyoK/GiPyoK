@@ -14,7 +14,7 @@ struct MyHtmlFactory<Site: Website>: HTMLFactory {
             .head(for: index, on: context.site),
             
             .body(
-                .myHeader(for: context),
+                .header(for: context, selectedSection: (GiPyoJohnKim.SectionID.about as! Site.SectionID)),
                 
                 .wrapper(
                     .ul(
@@ -22,10 +22,13 @@ struct MyHtmlFactory<Site: Website>: HTMLFactory {
                         .forEach(context.allItems(sortedBy: \.date, order: .descending)) { item in
                             .li(
                                 .article(
-                                    .h1(.a(
-                                        .href(item.path),
-                                        .text(item.title)
-                                    )),
+                                    .h1(
+                                        .a(
+                                            .href(item.path),
+                                            .text(item.title)
+                                        ) //a
+                                    ), //h1
+                                    .tagList(for: item, on: context.site),
                                     .p(.text(item.description))
                                 ) //article
                             ) //li
@@ -47,9 +50,15 @@ struct MyHtmlFactory<Site: Website>: HTMLFactory {
             .head(for: item, on: context.site),
             
             .body(
-                .myHeader(for: context)
-            )
-        )
+                .myHeader(for: context),
+                
+                .wrapper(
+                    .article(
+                        .contentBody(item.body)
+                    ) //article
+                ) //wrapper
+            ) //body
+        ) //html
     }
     
     func makePageHTML(for page: Page, context: PublishingContext<Site>) throws -> HTML {
