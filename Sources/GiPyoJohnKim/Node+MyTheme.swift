@@ -37,4 +37,18 @@ extension Node where Context == HTML.BodyContext {
             ))
         })
     }
+    
+    static func myHeader<T: Website>(for context: PublishingContext<T>) -> Node {
+        .header(
+            .wrapper (
+                .nav(
+                    .class("site-name"),
+                    .a(
+                        .href("/"),
+                        .text(context.site.name)
+                    ) //a
+                ) //nav
+            ) //wrapper
+        ) //header
+    }
 }

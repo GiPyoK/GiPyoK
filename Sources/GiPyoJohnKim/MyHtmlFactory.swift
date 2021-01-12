@@ -14,14 +14,7 @@ struct MyHtmlFactory<Site: Website>: HTMLFactory {
             .head(for: index, on: context.site),
             
             .body(
-                .header(
-                    .wrapper (
-                        .nav(
-                            .class("site-name"),
-                            .text(context.site.name)
-                        ) //nav
-                    ) //wrapper
-                ), //header
+                .myHeader(for: context),
                 
                 .wrapper(
                     .ul(
@@ -51,7 +44,11 @@ struct MyHtmlFactory<Site: Website>: HTMLFactory {
     
     func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws -> HTML {
         HTML(
-            .head(for: item, on: context.site)
+            .head(for: item, on: context.site),
+            
+            .body(
+                .myHeader(for: context)
+            )
         )
     }
     
