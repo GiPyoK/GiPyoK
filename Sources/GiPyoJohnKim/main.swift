@@ -18,7 +18,7 @@ struct GiPyoJohnKim: Website {
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "https://GiPyoK.github.io")!
+    var url = URL(string: "https://gipyok.github.io/GiPyoK/")!
     var name = "Gi Pyo John Kim's Portfolio"
     var description = "Gi Pyo John Kim - My development journey"
     var language: Language { .english }
@@ -33,6 +33,6 @@ struct GiPyoJohnKim: Website {
 //                                   .generateSiteMap()])
 
 try GiPyoJohnKim().publish(withTheme: .myTheme,
-                           deployedUsing: .gitHub("GiPyoK/GiPyoK.github.io"),
+                           deployedUsing: .gitHub("GiPyoK/GiPyoK"),
                            plugins: [.splash(withClassPrefix: "")]
 )
