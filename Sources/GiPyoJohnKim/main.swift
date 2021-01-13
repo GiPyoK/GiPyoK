@@ -1,6 +1,8 @@
 import Foundation
 import Publish
 import Plot
+import SplashPublishPlugin
+
 
 // This type acts as the configuration for your website.
 struct GiPyoJohnKim: Website {
@@ -23,4 +25,14 @@ struct GiPyoJohnKim: Website {
     var imagePath: Path? { nil }
 }
 
-try GiPyoJohnKim().publish(withTheme: .myTheme)
+//try GiPyoJohnKim().publish(using: [.installPlugin(.splash(withClassPrefix: "")),
+//                                   .copyResources(),
+//                                   .addMarkdownFiles(at: "Content"),
+//                                   .sortItems(by: \.date),
+//                                   .generateHTML(withTheme: .foundation),
+//                                   .generateSiteMap()])
+
+try GiPyoJohnKim().publish(withTheme: .myTheme,
+                           deployedUsing: .gitHub("GiPyoK/Portfolio-with-Swift-Publish.github.io"),
+                           plugins: [.splash(withClassPrefix: "")]
+)

@@ -41,8 +41,31 @@ struct MyHtmlFactory<Site: Website>: HTMLFactory {
     //context.items(taggedWith: "Blog", sortedBy: \.date, order: .descending)
     func makeSectionHTML(for section: Section<Site>, context: PublishingContext<Site>) throws -> HTML {
         HTML(
-            .head(for: section, on: context.site)
-        )
+            .head(for: section, on: context.site),
+            
+            .body(
+                .header(for: context, selectedSection: section.id),
+                
+                .wrapper(
+                    .ul(
+                        .class("item-list"),
+                        .forEach(section.items) { item in
+                            .li(
+                                .article(
+                                    .h1(
+                                        .a(
+                                            .href(item.path),
+                                            .text(item.title)
+                                        ) //a
+                                    ), //h1
+                                    .tagList(for: item, on: context.site),
+                                    .p(.text(item.description))
+                                ) //article
+                            ) //li
+                        }) //ul
+                ) //wrapper
+            ) //body
+        ) //html
     }
     
     func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws -> HTML {
@@ -50,10 +73,12 @@ struct MyHtmlFactory<Site: Website>: HTMLFactory {
             .head(for: item, on: context.site),
             
             .body(
-                .myHeader(for: context),
+                .header(for: context, selectedSection: item.sectionID),
                 
                 .wrapper(
                     .article(
+                        .class("content"),
+                        .tagList(for: item, on: context.site),
                         .contentBody(item.body)
                     ) //article
                 ) //wrapper
