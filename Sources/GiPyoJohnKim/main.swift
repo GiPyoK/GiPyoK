@@ -33,6 +33,6 @@ struct GiPyoJohnKim: Website {
 //                                   .generateSiteMap()])
 
 try GiPyoJohnKim().publish(withTheme: .myTheme,
-                           deployedUsing: .gitHub("GiPyoK/Portfolio-with-Swift-Publish.github.io"),
+                           deployedUsing: .gitHub("GiPyoK/GiPyoK.github.io"),
                            plugins: [.splash(withClassPrefix: "")]
 )
