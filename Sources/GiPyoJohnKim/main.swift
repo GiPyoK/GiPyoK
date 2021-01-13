@@ -18,7 +18,7 @@ struct GiPyoJohnKim: Website {
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "https://gipyojohnkim.com")!
+    var url = URL(string: "https://GiPyoK.github.io")!
     var name = "Gi Pyo John Kim's Portfolio"
     var description = "Gi Pyo John Kim - My development journey"
     var language: Language { .english }
