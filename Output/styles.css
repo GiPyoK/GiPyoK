@@ -1,3 +1,9 @@
+/**
+*  Publish Foundation theme
+*  Copyright (c) John Sundell 2019
+*  MIT license, see LICENSE file for details
+*/
+
 * {
     margin: 0;
     padding: 0;
@@ -39,6 +45,63 @@ header .site-name {
     font-weight: bold;
 }
 
+
+pre {
+    margin-bottom: 1.5em;
+    background-color: #1a1a1a;
+    padding: 16px 0;
+    border-radius: 16px;
+}
+
+pre code {
+    font-family: monospace;
+    display: block;
+    padding: 0 20px;
+    color: #a9bcbc;
+    line-height: 1.4em;
+    font-size: 0.95em;
+    overflow-x: auto;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+}
+
+pre code .keyword {
+    color: #e73289;
+}
+
+pre code .type {
+    color: #8281ca;
+}
+
+pre code .call {
+    color: #348fe5;
+}
+
+pre code .property {
+    color: #21ab9d;
+}
+
+pre code .number {
+    color: #db6f57;
+}
+
+pre code .string {
+    color: #fa641e;
+}
+
+pre code .comment {
+    color: #6b8a94;
+}
+
+pre code .dotAccess {
+    color: #92b300;
+}
+
+pre code .preprocessing {
+    color: #b68a00;
+}
+
+
 nav {
     margin-top: 20px;
 }
@@ -63,7 +126,17 @@ h2 {
 }
 
 p {
-    margin-bottom: 10px;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+article p {
+    margin-top: 20px;
+    font-size: 1.05em;
+    line-height: 1.5;
 }
 
 a {
@@ -162,65 +235,9 @@ footer {
     }
 }
 
-
-
-/**
- *  Example CSS file that can be used to style Splash HTML output
- *  Copyright (c) John Sundell 2018
- *  MIT license - see LICENSE.md
- */
-
-pre {
-    margin-bottom: 1.5em;
-    background-color: #1a1a1a;
-    padding: 16px 0;
-    border-radius: 16px;
-}
-
-pre code {
-    font-family: monospace;
+img {
     display: block;
-    padding: 0 20px;
-    color: #a9bcbc;
-    line-height: 1.4em;
-    font-size: 0.95em;
-    overflow-x: auto;
-    white-space: pre;
-    -webkit-overflow-scrolling: touch;
-}
-
-pre code .keyword {
-    color: #e73289;
-}
-
-pre code .type {
-    color: #8281ca;
-}
-
-pre code .call {
-    color: #348fe5;
-}
-
-pre code .property {
-    color: #21ab9d;
-}
-
-pre code .number {
-    color: #db6f57;
-}
-
-pre code .string {
-    color: #fa641e;
-}
-
-pre code .comment {
-    color: #6b8a94;
-}
-
-pre code .dotAccess {
-    color: #92b300;
-}
-
-pre code .preprocessing {
-    color: #b68a00;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }

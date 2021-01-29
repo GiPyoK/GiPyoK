@@ -14,7 +14,7 @@ I first built my portfolio website with basic HTML and CSS. It was my first atte
 
 ### Getting started
 
-```swift
+```
 $ git clone https://github.com/JohnSundell/Publish.git
 $ cd Publish
 $ make
@@ -164,15 +164,15 @@ The`.head` tag will display the name of the site, and the `.body` tag will loop 
 
 This is my folder structure:
 
-<img src="/images/Untitled.png" alt="1" width="500"/>
+<img src="/images/Portfolio/Untitled.png" alt="0" />
 
 This is how the dummy markdown file is formatted:
 
-![images/Untitled 1.png](images/Untitled 1.png)
+<img src="/images/Portfolio/Untitled 1.png" alt="1" />
 
 This is how the actual site looks like:
 
-![images/Untitled%202.png](images/Untitled%202.png)
+<img src="/images/Portfolio/Untitled 2.png" alt="2" />
 
 When I was playing around with the Foundation theme, I remembered that there were section names below the site name. I found `.header` tag already defined in `Theme+Foundation.swift` file and replaced my `.myHeader` with it.
 
@@ -185,7 +185,7 @@ When I was playing around with the Foundation theme, I remembered that there wer
 
 Although the main page shows a list of blog posts and project posts, I will change the main page to be the about page. So I highlighted the about section, and this is how the main page:
 
-![images/Untitled%203.png](images/Untitled%203.png)
+<img src="/images/Portfolio/Untitled 3.png" alt="3" />
 
 Right now, a blank page shows up when the title of a post is clicked. By implementing `makeItemHTML()` function, the blank page will be replaced with the actual content of the post.
 
@@ -199,7 +199,7 @@ func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws
                 
                 .wrapper(
                     .article(
-												.class("content"),
+                        .class("content"),
                         .tagList(for: item, on: context.site),
                         .contentBody(item.body)
                     ) //article
@@ -209,4 +209,4 @@ func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws
     }
 ```
 
-![images/Untitled%204.png](images/Untitled%204.png)
+<img src="/images/Portfolio/Untitled 4.png" alt="4" />

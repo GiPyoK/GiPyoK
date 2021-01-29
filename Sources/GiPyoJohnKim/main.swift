@@ -18,21 +18,14 @@ struct GiPyoJohnKim: Website {
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "https://gipyok.github.io/GiPyoK/")!
+    var url = URL(string: "https://gipyojohnkim.com")!
     var name = "Gi Pyo John Kim's Portfolio"
     var description = "Gi Pyo John Kim - My development journey"
     var language: Language { .english }
     var imagePath: Path? { nil }
 }
 
-//try GiPyoJohnKim().publish(using: [.installPlugin(.splash(withClassPrefix: "")),
-//                                   .copyResources(),
-//                                   .addMarkdownFiles(at: "Content"),
-//                                   .sortItems(by: \.date),
-//                                   .generateHTML(withTheme: .foundation),
-//                                   .generateSiteMap()])
-
 try GiPyoJohnKim().publish(withTheme: .myTheme,
-                           deployedUsing: .gitHub("GiPyoK/GiPyoK"),
+                           deployedUsing: .gitHub("GiPyoK/Portfolio", useSSH: false),
                            plugins: [.splash(withClassPrefix: "")]
 )
