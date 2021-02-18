@@ -292,9 +292,7 @@ h3 {
     }
 }
 
-.center {
-  justify-content: center;
-}
+
 
 tr, td {
     text-align: center;
@@ -314,6 +312,8 @@ tr:last-child {
     border-bottom: none;
 }
 
+
+/* Splash style */
 pre {
     margin-bottom: 1.5em;
     background-color: rgba(34, 37, 41, 1);
@@ -367,4 +367,10 @@ pre code .dotAccess {
 
 pre code .preprocessing {
     color: #b68a00;
+}
+
+/* responsive */
+.responsive {
+   width: 100%;
+   height: auto;
 }
