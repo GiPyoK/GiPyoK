@@ -1,7 +1,7 @@
 ---
 date: 2020-03-02 10:10
 description: iOS/web app for capturing and annotating photos of manufacturing machinery
-tags: SchematicCapture, Swift, Firebase, CoreData, PencilKit, PDFKit, collab
+tags: SchematicCapture, Swift, iOS, UIKit, Firebase, CoreData, PencilKit, PDFKit, collab
 excerpt: Schematic Capture 
 ---
 # Schematic Capture <a href="https://github.com/Lambda-School-Labs/schematic-capture-ios" target="_blank"><i class="fab fa-github" style="font-size: 1em;"></i></a>

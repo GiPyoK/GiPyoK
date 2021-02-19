@@ -1,7 +1,7 @@
 ---
 date: 2021-01-07 10:34
 description: Getting started with Publish by John Sundell to create my own portfolio website with Swift
-tags: Publish, JohnSundell, Swift, Website
+tags: Publish, Swift, 
 excerpt: Creating Portfolio with Publish by John Sundell
 ---
 # Creating Portfolio with Publish by John Sundell

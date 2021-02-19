@@ -12,7 +12,7 @@ extension Node where Context == HTML.BodyContext {
     static func tagList(for tags: [Tag], on site: GiPyoJohnKim) -> Node {
         return .div(.class("post-tags"), .forEach(tags) { tag in
             .a(
-                .class("post-category post-category-\(tag.string.lowercased())"),
+                .class("post-category post-category-\(tag.string.filter {!$0.isWhitespace}.lowercased())"),
                 .href(site.path(for: tag)),
                 .text(tag.string)
             )

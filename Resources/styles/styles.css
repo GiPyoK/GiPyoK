@@ -154,9 +154,6 @@ h3 {
 .post-category-tutorial {
     background: #2A3132;
 }
-.post-category-other {
-    background: #763526;
-}
 .post-category-publish {
     background: #fd79a8;
 }
@@ -169,9 +166,38 @@ h3 {
 .post-category-web {
     background: #e17055;
 }
-.post-category-angular {
-    background: #d63031;
+.post-category-python {
+    background: #00b894;
 }
+.post-category-ai {
+    background: #a29bfe;
+}
+.post-category-neat {
+    background: #e17055;
+}
+.post-category-gamedev {
+    background: #574b90;
+}
+.post-category-firebase {
+    background: #c44569;
+}
+.post-category-coredata {
+    background: #546de5;
+}
+.post-category-pencilkit {
+    background: #778beb;
+}
+.post-category-pdfkit {
+    background: #ff7675;
+}
+.post-category-collab {
+    background: #fd79a8;
+}
+.post-category-schematiccapture {
+    background: #f19066;
+}
+/* Use these colors for more tags https://flatuicolors.com/palette/ru */
+
 .post-images {
     margin: 1em 0;
 }
