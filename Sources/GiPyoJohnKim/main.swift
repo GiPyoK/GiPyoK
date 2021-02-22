@@ -23,7 +23,7 @@ struct GiPyoJohnKim: Website {
     var name = "Gi Pyo John Kim"
     var description = "iOS Developer"
     var language: Language { .english }
-    var imagePath: Path? { nil }
+    var imagePath: Path? { "/images/portfolio cover image.png" }
     var socialMedia: [SocialMedia] = [.location, .email, .github, .linkedIn, .resume]
 }
 
