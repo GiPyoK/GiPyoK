@@ -11,6 +11,6 @@ excerpt: iOS app to help you with the game Rise of Kingdoms
 ROK Calculator  (with more than 2.6k downloads) is an assistant app that helps calculate how much speed-ups a user has in the mobile game "Rise of Kingdoms". Different kinds of speed-ups can be added together and view the total amount in days, hours, or minutes. ROK Calculator has saving mechanism as well, so that the users can their speed-up amount history as bar graphs. 
 
 - **Swift**
-- **SwiftUI**
+- **SwiftUI** - Built responsive UI with MVVM design pattern
 - **CoreData** - Saved user speed-up data
 - **SwiftUICharts** - Displayed saved  speed-up data as bar graphs

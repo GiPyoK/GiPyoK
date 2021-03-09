@@ -1,12 +1,12 @@
 ---
 date: 2021-01-07 10:34
 description: Getting started with Publish by John Sundell to create my own portfolio website with Swift
-tags: Publish, Swift, 
+tags: Publish, Swift
 excerpt: Creating Portfolio with Publish by John Sundell
 ---
 # Creating Portfolio with Publish by John Sundell
 
-I first built my portfolio website with basic HTML and CSS. It was my first attempt at creating a website and it looked ugly. While I was browsing through various libraries to enhance the look and maintainability of my portfolio, I stumbled upon a library called [Publish](https://github.com/JohnSundell/Publish) by John Sundell. Publish is a static site generator built for Swift developers. I thought this would be a good tool to make my portfolio website and be a fun challenge to learn about it. test
+I first built my portfolio website with basic HTML and CSS. It was my first attempt at creating a website and it looked ugly. While I was browsing through various libraries to enhance the look and maintainability of my portfolio, I stumbled upon a library called [Publish](https://github.com/JohnSundell/Publish) by John Sundell. Publish is a static site generator built for Swift developers. I thought this would be a good tool to make my portfolio website and be a fun challenge to learn about it.
 
 ### Getting started
 
@@ -164,11 +164,11 @@ This is my folder structure:
 
 This is how the dummy markdown file is formatted:
 
-<img src="/images/Portfolio/Untitled 1.png" alt="1" />
+<img class="responsive" src="/images/Portfolio/Untitled 1.png" alt="1" width="720" />
 
 This is how the actual site looks like:
 
-<img src="/images/Portfolio/Untitled 2.png" alt="2" />
+<img class="responsive" src="/images/Portfolio/Untitled 2.png" alt="2" width="720" />
 
 When I was playing around with the Foundation theme, I remembered that there were section names below the site name. I found `.header` tag already defined in `Theme+Foundation.swift` file and replaced my `.myHeader` with it.
 
@@ -181,7 +181,7 @@ When I was playing around with the Foundation theme, I remembered that there wer
 
 Although the main page shows a list of blog posts and project posts, I will change the main page to be the about page. So I highlighted the about section, and this is how the main page:
 
-<img src="/images/Portfolio/Untitled 3.png" alt="3" />
+<img class="responsive" src="/images/Portfolio/Untitled 3.png" alt="3" width="720" />
 
 Right now, a blank page shows up when the title of a post is clicked. By implementing `makeItemHTML()` function, the blank page will be replaced with the actual content of the post.
 
@@ -205,4 +205,4 @@ func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws
     }
 ```
 
-<img src="/images/Portfolio/Untitled 4.png" alt="4" />
+<img class="responsive" src="/images/Portfolio/Untitled 4.png" alt="4" width="720" />

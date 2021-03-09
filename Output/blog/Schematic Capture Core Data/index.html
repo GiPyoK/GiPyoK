@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous"/><link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/grids-responsive-min.css"/><link rel="stylesheet" href="/styles/styles.css"/><link rel="stylesheet" href="/styles/all.css"/></head><body><div id="layout" class="pure-g"><div><div class="pure-menu pure-menu-horizontal pure-u-1-1 top-header"><a class="pure-menu-heading" href="/">Gi Pyo John Kim</a><ul class="pure-menu-list"><li class="pure-menu-item"><a class="pure-menu-link" href="/about">About</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/projects">Projects</a></li><li class="pure-menu-item"><a class="pure-menu-link" href="/blog">Blog</a></li></ul></div></div><div class="sidebar pure-u-1 pure-u-md-1-4"><div class="header"><div id="layout" class="author__avatar"><img src="https://avatars.githubusercontent.com/u/18320084?s=400&u=92a1ad581ff45b1f9107f616068011562b3be323&v=4"/><div class="pure-u-md-1-1 pure-u-3-4"><h1 class="brand-title">Gi Pyo John Kim</h1><h3 class="brand-tagline">iOS Developer</h3></div></div><div id="layout" class="pure-g"><div class="pure-u-md-1-1"><a href="https://www.google.com/maps/place/La+Habra,+CA+90631/@33.9262421,-117.9828256,13z/data=!3m1!4b1!4m5!3m4!1s0x80c2d5313a8b3d83:0xa81f48a1853026dd!8m2!3d33.9318591!4d-117.946137"><i class="fas fa-map-marker-alt l-box social-icon"></i><a class="social-media" href="https://www.google.com/maps/place/La+Habra,+CA+90631/@33.9262421,-117.9828256,13z/data=!3m1!4b1!4m5!3m4!1s0x80c2d5313a8b3d83:0xa81f48a1853026dd!8m2!3d33.9318591!4d-117.946137">La Habra, California</a></a></div><div class="pure-u-md-1-1"><a href="mailto:gipyok@gmail.com"><i class="fas fa-envelope l-box social-icon"></i><a class="social-media" href="mailto:gipyok@gmail.com">Email</a></a></div><div class="pure-u-md-1-1"><a href="https://github.com/GiPyoK"><i class="fab fa-github-square l-box social-icon"></i><a class="social-media" href="https://github.com/GiPyoK">GitHub</a></a></div><div class="pure-u-md-1-1"><a href="https://www.linkedin.com/in/gipyo-john-kim/"><i class="fab fa-linkedin l-box social-icon"></i><a class="social-media" href="https://www.linkedin.com/in/gipyo-john-kim/">LinkedIn</a></a></div><div class="pure-u-md-1-1"><a href="/resume.pdf"><i class="fas fa-file l-box social-icon"></i><a class="social-media" href="/resume.pdf">Resumé</a></a></div></div></div></div><div class="content pure-u-1 pure-u-md-3-5 pure-u-xl-6-10"><h2 class="post-title"><a href="/blog/Schematic Capture Core Data">Schematic Capture: Core Data</a></h2><p class="post-meta">March 3, 2020</p><div class="post-tags"><a class="post-category post-category-schematiccapture" href="/tags/schematiccapture">SchematicCapture</a><a class="post-category post-category-coredata" href="/tags/coredata">CoreData</a><a class="post-category post-category-json" href="/tags/json">JSON</a><a class="post-category post-category-swift" href="/tags/swift">Swift</a></div><div class="post-description"><div><h1>Schematic Capture: Core Data</h1><p>Schematic Capture needs to persist projects. A project holds different job sheets; a job sheet holds different components; a component has a corresponding photo of that component.<br><br>For easier understanding of the relationship among the entities, here is the graph view:</p><img class="responsive" src="/images/Schematic Capture Core Data/Core Data Graph.png" alt="Core Data Graph" width="720" /><p>The single arrowhead represents one-to-one relationship, and the double arrowhead represents one-to-many relationship. This was my first time dealing with relationships with core data, but after some struggle, I was able to setup the relationship.</p><p>Referencing the above relationships, I created extensions on core data models with convenience init functions. By doing so, it helps the work flow of decoding and encoding JSON data when downloading and uploading the projects.</p><pre><code><span class="comment">//  Project+Convenience.swift</span>
+<span class="keyword">extension</span> <span class="type">Project</span> {
+    <span class="keyword">var</span> projectRepresentation: <span class="type">ProjectRepresentation</span>? {
+        <span class="keyword">guard let</span> name = name, <span class="keyword">let</span> client = client <span class="keyword">else</span> { <span class="keyword">return nil</span> }
+        <span class="comment">// Sort the job sheet array by id</span>
+        <span class="keyword">let</span> idDescriptor = <span class="type">NSSortDescriptor</span>(key: <span class="string">"id"</span>, ascending: <span class="keyword">true</span>)
+        <span class="comment">// convert NSSet to an array, if nil, return nil</span>
+        <span class="keyword">let</span> jobSheetsArr = jobSheets != <span class="keyword">nil</span> ? (jobSheets!.<span class="call">sortedArray</span>(using: [idDescriptor]) <span class="keyword">as</span>? [<span class="type">JobSheetRepresentation</span>]) : <span class="keyword">nil
+        return</span> <span class="type">ProjectRepresentation</span>(id: <span class="type">Int</span>(id), name: name, jobSheets: jobSheetsArr, client: client, clientId: <span class="type">Int</span>(clientId))
+    }
+    
+    <span class="keyword">@discardableResult convenience init</span>(id: <span class="type">Int</span>,
+                                        name: <span class="type">String</span>,
+                                        jobSheets: [<span class="type">JobSheet</span>]?,
+                                        client: <span class="type">String</span>,
+                                        clientId: <span class="type">Int</span>,
+                                        context: <span class="type">NSManagedObjectContext</span>) {
+        <span class="keyword">self</span>.<span class="keyword">init</span>(context: context)
+        <span class="keyword">self</span>.<span class="property">id</span> = <span class="type">Int32</span>(id)
+        <span class="keyword">self</span>.<span class="property">name</span> = name
+        <span class="keyword">self</span>.<span class="property">jobSheets</span> = jobSheets != <span class="keyword">nil</span> ? <span class="type">NSSet</span>(array: jobSheets!) : <span class="keyword">nil
+        self</span>.<span class="property">client</span> = client
+        <span class="keyword">self</span>.<span class="property">clientId</span> = <span class="type">Int32</span>(clientId)
+    }
+    
+    <span class="keyword">@discardableResult convenience init</span>(projectRepresentation: <span class="type">ProjectRepresentation</span>, context: <span class="type">NSManagedObjectContext</span>) {
+        
+        <span class="keyword">let</span> jobSheets = projectRepresentation.<span class="property">jobSheets</span> != <span class="keyword">nil</span> ? projectRepresentation.<span class="property">jobSheets</span>!.<span class="call">map</span> { <span class="type">JobSheet</span>(jobSheetRepresentation: $0, context: context) } : <span class="keyword">nil
+        
+        self</span>.<span class="keyword">init</span> (id: projectRepresentation.<span class="property">id</span>,
+            name: projectRepresentation.<span class="property">name</span>,
+            jobSheets: jobSheets,
+            client: projectRepresentation.<span class="property">client</span>,
+            clientId: projectRepresentation.<span class="property">clientId</span>,
+            context: context)
+    }
+}
+</code></pre><p>By using <code>convenience init()</code>, it makes easy to convert between the actual core data model and the representation of that model.</p><p>I made the representation model like so:</p><pre><code><span class="comment">//  ProjectRepresentation.swift</span>
+<span class="keyword">struct</span> ProjectRepresentation: <span class="type">Codable</span> {
+    <span class="keyword">let</span> id: <span class="type">Int</span>
+    <span class="keyword">var</span> name: <span class="type">String</span>
+    <span class="keyword">var</span> jobSheets: [<span class="type">JobSheetRepresentation</span>]?
+    <span class="keyword">let</span> client: <span class="type">String</span>
+    <span class="keyword">let</span> clientId: <span class="type">Int</span>
+    
+    <span class="keyword">private enum</span> CodingKeys: <span class="type">String</span>, <span class="type">CodingKey</span> {
+        <span class="keyword">case</span> id
+        <span class="keyword">case</span> name
+        <span class="keyword">case</span> jobSheets = <span class="string">"jobsheet"</span>
+        <span class="keyword">case</span> client = <span class="string">"companyName"</span>
+        <span class="keyword">case</span> clientId
+    }
+}
+</code></pre><p>When the app is launched, core data model or the JSON data is converted to the representation model and used throughout the app. Displaying the data and updating the data is handled with the representation model. When uploading the data, representation model is converted into a JSON model and uploaded to our firebase storage. When persisting the data with core data, the representation model is converted back to core data model and saved in a user's phone storage.</p><p>Convenience initializers and representation models are made in similar manner for other entities as well.</p><p>An example of representation model being used is when downloading project and decoding the data.</p><pre><code><span class="comment">//  ProjectController.swift</span>
+<span class="keyword">class</span> ProjectController {
+    
+    <span class="keyword">var</span> bearer: <span class="type">Bearer</span>?
+    <span class="keyword">var</span> user: <span class="type">User</span>?
+    <span class="keyword">var</span> projects: [<span class="type">ProjectRepresentation</span>] = []
+
+		<span class="keyword">private let</span> baseURL = <span class="type">URL</span>(string: <span class="string">"https://sc-test-be.herokuapp.com/api"</span>)!
+
+		<span class="keyword">func</span> downloadAssignedJobs(completion: <span class="keyword">@escaping</span> (<span class="type">NetworkingError</span>?) -&gt; <span class="type">Void</span> = { <span class="keyword">_ in</span> }) {
+        
+        <span class="keyword">guard let</span> bearer = <span class="keyword">self</span>.<span class="property">bearer</span> <span class="keyword">else</span> {
+            <span class="call">completion</span>(.<span class="dotAccess">noBearer</span>)
+            <span class="keyword">return</span>
+        }
+        
+        <span class="keyword">let</span> requestURL = <span class="keyword">self</span>.<span class="property">baseURL</span>.<span class="call">appendingPathComponent</span>(<span class="string">"jobsheets"</span>).<span class="call">appendingPathComponent</span>(<span class="string">"assigned"</span>)
+        
+        <span class="keyword">var</span> request = <span class="type">URLRequest</span>(url: requestURL)
+        request.<span class="property">httpMethod</span> = <span class="type">HTTPMethod</span>.<span class="property">get</span>.<span class="property">rawValue</span>
+        request.<span class="call">setValue</span>(<span class="string">"Bearer</span> \(bearer.<span class="property">idToken</span>)<span class="string">"</span>, forHTTPHeaderField: <span class="type">HeaderNames</span>.<span class="property">authorization</span>.<span class="property">rawValue</span>)
+        request.<span class="call">setValue</span>(<span class="string">"application/json"</span>, forHTTPHeaderField: <span class="type">HeaderNames</span>.<span class="property">contentType</span>.<span class="property">rawValue</span>)
+        
+        <span class="type">URLSession</span>.<span class="property">shared</span>.<span class="call">dataTask</span>(with: request) { (data, <span class="keyword">_</span>, error) <span class="keyword">in
+            
+            if let</span> error = error {
+                <span class="call">print</span>(<span class="string">"Errer getting assigned jobs:</span> \(error)<span class="string">"</span>)
+                <span class="call">completion</span>(.<span class="call">serverError</span>(error))
+                <span class="keyword">return</span>
+            }
+            
+            <span class="keyword">guard let</span> data = data <span class="keyword">else</span> {
+                <span class="call">print</span>(<span class="string">"No data returned from data task"</span>)
+                <span class="call">completion</span>(.<span class="dotAccess">noData</span>)
+                <span class="keyword">return</span>
+            }
+            
+            <span class="comment">// decode projects</span>
+            <span class="keyword">let</span> decoder = <span class="type">JSONDecoder</span>()
+            decoder.<span class="property">dateDecodingStrategy</span> = .<span class="dotAccess">iso8601</span>
+            <span class="keyword">do</span> {
+                <span class="keyword">let</span> projectsRep = <span class="keyword">try</span> decoder.<span class="call">decode</span>([<span class="type">ProjectRepresentation</span>].<span class="keyword">self</span>, from: data)
+                
+                <span class="keyword">self</span>.<span class="call">updateProjects</span>(with: projectsRep)
+                <span class="keyword">self</span>.<span class="property">projects</span> = projectsRep
+                <span class="keyword">self</span>.<span class="property">projects</span>.<span class="call">sort</span> { $0.<span class="property">id</span> &lt; $1.<span class="property">id</span> }
+                <span class="call">print</span>(<span class="string">"\n\nPROJECTS:</span> \(<span class="keyword">self</span>.<span class="property">projects</span>)<span class="string">\n\n"</span>)
+            } <span class="keyword">catch</span> {
+                <span class="call">print</span>(<span class="string">"Error decoding the jobs:</span> \(error)<span class="string">"</span>)
+                <span class="call">completion</span>(.<span class="dotAccess">badDecode</span>)
+            }
+            
+            <span class="call">completion</span>(<span class="keyword">nil</span>)
+        }.<span class="call">resume</span>()
+    }
+}
+
+</code></pre><p>Because <code>CodingKeys</code> are already defined in the representation model, <code>JSONDecoder</code> can easily decode the data into the representation model. Saving the representation model in the core data can also be done easily with convenience initializer, you just have to pass in the representation model and you have the core data model ready to be saved.</p></div></div></div><div class="footer pure-u-1"><div class="pure-u-1">© 2021 Gi Pyo John Kim</div><div class="pure-u-1">Generated using <a href="https://github.com/johnsundell/publish">Publish</a>. Written in Swift</div></div></div></body></html>

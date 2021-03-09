@@ -8,7 +8,7 @@ excerpt: iOS/web app for capturing and annotating photos of manufacturing machin
  
  <img src="/images/Schematic Capture/Schematic Capture mockup.png" alt="Schematic Capture iPhone" class="responsive" width="720" />
  
-<video class="responsive" width="360" controls>
+<video  width="420" controls>
     <source src="/videos/Schematic Capture Demo.mp4" type="video/mp4">
     Schematic Capture Demo Video
 </video>
@@ -19,12 +19,12 @@ Schematic Capture is an iOS/web app for capturing and annotating photos of manuf
 This project was built with 4 web developers, 1 UX designer, and 1 iOS developer.
 
 - **Swift**
-- **UIKit**
 - **REST API**
+- **UIKit** - Built responsive UI with MVC design pattern
 - **Firebase Authentication -** Provide secure user authentication with email or Google account
 - **Firebase Storage -** Upload and store job sheets (CSV), schematics (PDF), and photos (PNG)
-- **CoreData** - Persist projects for offline capability
-- **PencilKit** - Annotated captured photos
+- **CoreData** - Persisted projects and jobs for offline capabilities
+- **PencilKit** - Handled Annotation of captured photos
 - **PDFKit** - Provided an easy mechanism to view schematics
 - **SCLAlertView** - Provided simple alter views for success and warning messages
 - **ExpyTableView** - Enabled expandable table view
